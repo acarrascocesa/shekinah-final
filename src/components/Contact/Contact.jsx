@@ -1,24 +1,48 @@
+import { useState } from "react";
 import "./contact.css";
+
 // import { useState } from "react";
 
 const Contact = () => {
-  // const [formData, setFormData] = useState({
-  //   name: "",
-  //   email: "",
-  //   title: "",
-  //   comment: ""
-  // });
-  // const handleChange = (e) => {
-  //   setFormData({
-  //     ...formData,
-  //     [e.target.name]: e.target.value
-  //   });
-  // };
+  const formInitialDetails = {
+    name: "",
+    title: "",
+    email: "",
+    comment: "",
+  };
 
-  const handleSubmit = (e) => {
+  const [formDetails, setFormDetails] = useState(formInitialDetails);
+  const [buttonText, setButtonText] = useState("Enviar");
+  const [status, setStatus] = useState({});
+
+  const onFormUpdate = (category, value) => {
+    setFormDetails({
+      ...formDetails,
+      [category]: value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    alert("Enviado"); // Simulación del envío del correo electrónico
-    // Aquí puedes agregar la lógica para enviar el formulario a un servidor de correo electrónico
+    setButtonText("Enviando...");
+    let response = await fetch("http://localhost:3000/api/contact", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json;charset=utf-8",
+      },
+      body: JSON.stringify(formDetails),
+    });
+    let result = await response.json();
+    setButtonText("Enviar");
+    setFormDetails(formInitialDetails);
+    if (result.code == 200) {
+      setStatus({ success: true, message: "Mensaje Enviado Exitosamente" });
+    } else {
+      setStatus({
+        success: false,
+        message: "Algo salio mal, trate de nuevo mas tarde",
+      });
+    }
   };
   return (
     <div id="contact" className="contact section__padding bg__whitesmoke">
@@ -42,32 +66,47 @@ const Contact = () => {
             <div className="form__elem form__elem--2">
               <input
                 type="text"
+                value={formDetails.name}
                 className="form__control"
                 placeholder="Tu Nombre"
+                onChange={(e) => onFormUpdate("name", e.target.value)}
               />
               <input
                 type="text"
+                value={formDetails.email}
                 className="form__control"
                 placeholder="Tu email"
+                onChange={(e) => onFormUpdate("email", e.target.value)}
               />
             </div>
             <div className="form__elem">
               <input
                 type="text"
+                value={formDetails.title}
                 className="form__control"
                 placeholder="El Titulo"
+                onChange={(e) => onFormUpdate("title", e.target.value)}
               />
             </div>
             <div className="form__elem">
               <textarea
                 className="form__control"
+                value={formDetails.comment}
                 placeholder="Tu comentario"
                 rows="6"
+                onChange={(e) => onFormUpdate("comment", e.target.value)}
               ></textarea>
             </div>
             <button type="submit" className="form__submit--btn btn btn__blue">
-              enviar
+              {buttonText}
             </button>
+            {status.message && (
+              <div className="row">
+                <p className={status.success === false ? "danger" : "success"}>
+                  {status.message}
+                </p>
+              </div>
+            )}
           </form>
         </div>
       </div>
