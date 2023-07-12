@@ -16,7 +16,7 @@ const WorkProcess = () => {
 
           <div className="vid__container">
             <iframe
-              width="560"
+              width="460"
               height="315"
               src="https://www.youtube.com/embed/JYqywuHD8LY"
               title="YouTube video player"
