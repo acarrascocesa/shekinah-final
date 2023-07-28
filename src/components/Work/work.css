@@ -22,6 +22,8 @@
 }
 .work__content--item .icon img {
   width: 40px;
+  margin: 10px; /* Añadido para separar las imágenes */
+  border-radius: 10px; /* Añadido para dar bordes redondeados a las imágenes */
 }
 .work__content--item:hover .icon {
   opacity: 1;
@@ -76,7 +78,10 @@
   width: 100%;
 }
 .image__modal--content img {
-  width: 100%;
+  width: 700px;
+  height: 600px;
+  margin: 10px; /* Añadido para separar las imágenes */
+  border-radius: 10px; /* Añadido para dar bordes redondeados a las imágenes */
 }
 .modal__close--btn {
   position: absolute;
