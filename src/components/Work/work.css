@@ -78,15 +78,15 @@
   width: 100%;
 }
 .image__modal--content img {
-  width: 700px;
+  width: 500px;
   height: 600px;
   margin: 10px; /* Añadido para separar las imágenes */
   border-radius: 10px; /* Añadido para dar bordes redondeados a las imágenes */
 }
 .modal__close--btn {
   position: absolute;
-  right: -15px;
-  top: 75px;
+  right: 255px;
+  top: 55px;
   border-radius: 50%;
   cursor: pointer;
   transition: var(--transition);

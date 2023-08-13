@@ -17,9 +17,9 @@
   height: 100%;
 }
 
-@media screen and (min-width: 6px) {
+@media screen and (max-width: 390px) {
   .video__container {
     padding-bottom: 7%;
-    width: 50%; /* Ajuste de proporción para pantallas de celulares */
+    width: 40%; /* Ajuste de proporción para pantallas de celulares */
   }
 }
